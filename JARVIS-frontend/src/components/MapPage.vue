@@ -209,6 +209,14 @@ function onMapClick(e: any){
         for (let k = 0; k < dataVenue.value.length; k++) {
           if (dataVenue.value[k].address === markerArray.value[i].address) {
             selectedVenue.value = dataVenue.value[k];
+            const bookingSection = document.getElementById('bookingBox');
+            if (bookingSection) {
+              bookingSection.scrollIntoView({ behavior: 'smooth' });
+              console.log("Scroll")
+            }
+            else{
+              console.log("no scroll")
+            }
             break;
           }
         }
@@ -316,7 +324,7 @@ function keepMapUpdated() {
           <h2>Orario di inizio: {{dataEventInfo.schedule_start}}</h2>
           <h2>Orario di fine: {{dataEventInfo.schedule_end}}</h2>
       </section>
-      <section class="item-disposition booking-box" v-if="selectedVenue">
+      <section id="bookingBox" class="item-disposition booking-box" v-if="selectedVenue">
         <div style="order: 2"></div>
         <h1 v-if="selectedVenue">{{ selectedVenue.name }}</h1>
         <h2 v-if="selectedVenue">Indirizzo: {{ selectedVenue.address}} </h2>
@@ -362,6 +370,12 @@ function keepMapUpdated() {
 </template>
 
 <style scoped>
+  h1{
+    font-size: 2em;
+  }
+  h2{
+    font-size: 1.3em;
+  }
   #map{
     border: solid var(--highlight-color) 2px;
     animation: fade-down 0.4s;
@@ -440,13 +454,5 @@ function keepMapUpdated() {
     .booking-box {
       width: 90%;
     }
-
-    h1{
-      font-size: 1.2em;
-    }
-    h2{
-      font-size: 0.5em;
-    }
-
   }
 </style>
